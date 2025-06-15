@@ -256,6 +256,18 @@ function App() {
           </ol>
         </div>
 
+        {/* Exemple de résultat */}
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Un exemple de résultat pour un compte ChatGPT utilisé fréquemment durant un peu plus de 2 ans et demi entre Novembre 2022 et Juin 2025</h3>
+          <div className="flex justify-center">
+            <img 
+              src="/public/Exemple.png" 
+              alt="Exemple de résultat du calculateur CO2 ChatGPT montrant 938 501 mots, 1 251 335 tokens, 12.513 kg de CO2 et 2.10 L d'eau consommée"
+              className="max-w-full h-auto rounded-lg shadow-sm border border-gray-100"
+            />
+          </div>
+        </div>
+
         {/* Affichage des erreurs */}
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-8">
