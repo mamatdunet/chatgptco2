@@ -625,11 +625,11 @@ function App() {
           <footer className="mt-8 border-t pt-4 text-sm text-gray-600">
             <p>
               Réalisé avec ❤️ et entrain, par
-              <a href="https://www.linkedin.com/in/matthieuchatry/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+               <a href="https://www.linkedin.com/in/matthieuchatry/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
                 Matthieu Chatry
               </a> – 
-              <a href="mailto:matthieu@amuseurs.fr" className="hover:underline">matthieu@amuseurs.fr</a> –
-              <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="hover:underline">sur Bolt.new</a>
+               <a href="mailto:matthieu@amuseurs.fr" className="hover:underline">matthieu@amuseurs.fr</a> –
+               <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="hover:underline">sur Bolt.new</a>
             </p>
           </footer>
         </section>
