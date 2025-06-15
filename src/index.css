@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fix spacing around links in prose content */
+.prose a::before {
+  content: " ";
+  white-space: pre;
+}
+
+.prose a:first-child::before {
+  content: "";
+}
+
+/* Ensure proper spacing in footer */
+footer a {
+  margin-left: 0.25rem;
+}
