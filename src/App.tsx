@@ -1092,9 +1092,9 @@ function App() {
 
 <p>
   Vous pouvez aussi tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
-</p>
-
-<h3 className="text-xl font-semibold mt-6 mb-2">Dernière méthode faisable avec un peu d'huile de coude</h3>
+</p><br />
+<br />
+<p>Dernière méthode faisable avec un peu d'huile de coude</p>
 
 <p>
   Je me suis aidé de l'IA pour créer un script Python assez simple. Le but : pouvoir l'exécuter depuis votre ordinateur pour récupérer les deux métriques qui nous intéressent :
