@@ -181,7 +181,7 @@ function App() {
       <div className="bg-blue-600 text-white py-3 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <p className="text-sm font-medium">
-            ☝️ Ce site ne stocke aucune donnée personnelle (voir pied de page pour plus d'informations)
+            ☝️ Ce site ne stocke EN THÉORIE aucune donnée personnelle (voir pied de page pour plus d'informations)
           </p>
         </div>
       </div>
