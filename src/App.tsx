@@ -378,7 +378,15 @@ function App() {
                   <svg className="w-6 h-6 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2C20 10.48 17.33 6.55 12 2zM7.83 14c.37 0 .67.26.67.62 0 .25-.12.47-.32.57.27.41.67.69 1.15.69.49 0 .88-.28 1.15-.69-.2-.1-.32-.32-.32-.57 0-.36.3-.62.67-.62.37 0 .67.26.67.62 0 .24-.12.46-.32.57.27.4.67.68 1.15.68.48 0 .88-.28 1.15-.68-.2-.11-.32-.33-.32-.57 0-.36.3-.62.67-.62.37 0 .67.26.67.62 0 1.55-1.3 2.8-2.92 2.8-.8 0-1.54-.29-2.08-.8-.54.51-1.28.8-2.08.8-1.62 0-2.92-1.25-2.92-2.8 0-.36.3-.62.67-.62z"/>
                   </svg>
-                  <h3 className="text-lg font-semibold text-gray-800">Eau consommée</h3>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-800">Eau consommée</h3>
+                  </div>
+                  <button
+                    onClick={() => toggleTooltip('water')}
+                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                  >
+                    <Info className="w-4 h-4" />
+                  </button>
                 </div>
                 <p className="text-3xl font-bold text-blue-600 mb-2">
                   {results.waterConsumption >= 1000 
@@ -389,6 +397,14 @@ function App() {
                 <p className="text-sm text-gray-500">
                   Pour le refroidissement des serveurs, soit {(results.waterConsumption / 1000 / 10).toFixed(1)} min sous la douche (à 10L/min)
                 </p>
+                {activeTooltip === 'water' && (
+                  <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    Calcul : {results.messageCount} messages × 0,32 ml = {results.waterConsumption.toFixed(1)} ml
+                    <br />Base : 0,32 ml d'eau par requête ChatGPT
+                    <br />Source : <a href="https://www.lesnumeriques.com/intelligence-artificielle/un-quinzieme-de-cuillere-a-cafe-l-etrange-aveu-de-sam-altman-sur-l-impact-ecologique-de-chatgpt-n238063.html" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Les Numériques - Impact écologique ChatGPT</a>
+                  </div>
+                )}
               </div>
             </div>
 
