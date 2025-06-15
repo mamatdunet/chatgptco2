@@ -593,7 +593,7 @@ function App() {
 
           <p>
             Lors de cette analyse, <strong>aucune de vos données personnelles n'est téléchargée ni stockée en ligne</strong>.
-            Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même :
+            Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même : 
             <a href="https://github.com/mamatdunet/chatgptco2" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
               github.com/mamatdunet/chatgptco2
             </a>.
