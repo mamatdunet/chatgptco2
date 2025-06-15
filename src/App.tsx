@@ -598,9 +598,9 @@ function App() {
             <br />
             Les émissions réelles peuvent aussi varier selon les sources d'énergie utilisées (Ici, on est plutôt sur une base de mix énergétique français).
             <br /><br />
-            <strong>À noter :</strong> ce calculateur ne prend en compte que les conversations textuelles de votre historique de conversation. Il ne calcule pas l'impact CO₂ de la génération d'images ou de vidéos que vous avez pu faire avec ChatGPT (environ 2g par image semble-t-il selon ces travaux de fin 2024. En savoir plus : <a href="https://arxiv.org/pdf/2311.16863" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">https://arxiv.org/pdf/2311.16863</a>).
+            <strong>À noter :</strong> ce calculateur ne prend en compte que les conversations textuelles de votre historique de conversation. Il ne calcule pas l'impact CO₂ de la génération d'images ou de vidéos que vous avez pu faire avec ChatGPT (environ 2g par image semble-t-il selon ces travaux de fin 2024. En savoir plus : <a href="https://arxiv.org/pdf/2311.16863" target=\"_blank" rel="noopener noreferrer\" className="text-blue-600 hover:text-blue-800 underline">https://arxiv.org/pdf/2311.16863</a>).
             <br /><br />
-            Réalisé avec ❤️ et entrain, par Matthieu Chatry - <a href="mailto:matthieu@amuseurs.fr" className="text-blue-600 hover:text-blue-800 underline">matthieu@amuseurs.fr</a> - <a href="https://www.linkedin.com/in/matthieuchatry/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">https://www.linkedin.com/in/matthieuchatry/</a> - sur Bolt.new
+            Réalisé avec ❤️ et entrain, par Matthieu Chatry - <a href="mailto:matthieu@amuseurs.fr" className="text-blue-600 hover:text-blue-800 underline">matthieu@amuseurs.fr</a> - <a href="https://www.linkedin.com/in/matthieuchatry/" target=\"_blank" rel="noopener noreferrer\" className="text-blue-600 hover:text-blue-800 underline">https://www.linkedin.com/in/matthieuchatry/</a> - sur Bolt.new
           </p>
         </footer>
       </div>
