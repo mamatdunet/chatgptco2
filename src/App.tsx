@@ -631,7 +631,7 @@ function App() {
           </p>
 
           <p>
-            Lors de cette analyse, <strong>aucune de vos données personnelles n'est téléchargée ni stockée en ligne</strong>.
+            Lors de cette analyse, <strong>aucune de vos données personnelles n'est censée être téléchargée ni stockée en ligne</strong>. Si je n'en ai pas l'assurance complète, c'est que je ne suis pas développeur. C'est un outil - Bolt.new qui a créé le code et, même si je lui ai demandé à l'outil de ne rien stocker et en ligne et qu'il me l'a confirmé à l'écrit plusieurs fois, je n'estime pas avoir les compétences suffisantes pour l'auditer de façon sérieuse.
             Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même sur : 
             <a href="https://github.com/mamatdunet/chatgptco2" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
               github.com/mamatdunet/chatgptco2
