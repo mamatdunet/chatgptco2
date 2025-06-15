@@ -373,7 +373,7 @@ function App() {
               </div>
 
               {/* Consommation d'eau */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 relative">
                 <div className="flex items-center mb-3">
                   <svg className="w-6 h-6 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2C20 10.48 17.33 6.55 12 2zM7.83 14c.37 0 .67.26.67.62 0 .25-.12.47-.32.57.27.41.67.69 1.15.69.49 0 .88-.28 1.15-.69-.2-.1-.32-.32-.32-.57 0-.36.3-.62.67-.62.37 0 .67.26.67.62 0 .24-.12.46-.32.57.27.4.67.68 1.15.68.48 0 .88-.28 1.15-.68-.2-.11-.32-.33-.32-.57 0-.36.3-.62.67-.62.37 0 .67.26.67.62 0 1.55-1.3 2.8-2.92 2.8-.8 0-1.54-.29-2.08-.8-.54.51-1.28.8-2.08.8-1.62 0-2.92-1.25-2.92-2.8 0-.36.3-.62.67-.62z"/>
