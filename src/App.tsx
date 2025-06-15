@@ -639,7 +639,7 @@ function App() {
           </p>
 
           <p>
-            Vous pouvez même tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
+            Vous pouvez aussi tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
           </p>
 
           <h3 className="text-xl font-semibold mt-6 mb-2">Côté calcul</h3>
