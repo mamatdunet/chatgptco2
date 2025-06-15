@@ -1094,7 +1094,7 @@ function App() {
   À noter que si vous chargez le site, coupez Internet, puis lancez l'analyse, elle fonctionnera toujours.
 </p>
 <br />
-<p><h4>Dernière méthode faisable avec un peu d'huile de coude</h4></p>
+<p><strong>Dernière méthode faisable avec un peu d'huile de coude</strong></p>
 <br />
 <p>
   Je me suis aidé de l'IA pour créer un script Python assez simple. Le but : pouvoir l'exécuter depuis votre ordinateur pour récupérer les deux métriques qui nous intéressent :
