@@ -195,7 +195,7 @@ function App() {
             <h1 className="text-4xl font-bold text-gray-800">Calculateur CO₂ ChatGPT</h1>
           </div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Calculez l'empreinte carbone approximative de vos conversations ChatGPT en analysant votre historique de chat exporté
+            Calculez l'empreinte carbone approximative de l'intégralité des conversations de votre compte ChatGPT en analysant votre historique de chat exporté
           </p>
         </div>
 
