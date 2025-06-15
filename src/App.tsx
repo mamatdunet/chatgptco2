@@ -1082,17 +1082,46 @@ function App() {
             Ce calculateur fonctionne entièrement dans votre navigateur.
           </p>
 
-          <p>
-            Lors de cette analyse, <strong>aucune de vos données personnelles n'est censée être téléchargée ni stockée en ligne</strong>. Si je n'en ai pas l'assurance complète, c'est que je ne suis pas développeur. C'est un outil - Bolt.new qui a créé le code et, même si je lui ai demandé à l'outil de ne rien stocker et en ligne et qu'il me l'a confirmé à l'écrit plusieurs fois, je n'estime pas avoir les compétences suffisantes pour l'auditer de façon sérieuse.
-            Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même sur : 
-            <a href="https://github.com/mamatdunet/chatgptco2" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-              github.com/mamatdunet/chatgptco2
-            </a>.
-          </p>
+         <p>
+  Lors de cette analyse, <strong>aucune de vos données personnelles n'est censée être téléchargée ni stockée en ligne</strong>. Si je n'en ai pas l'assurance complète, c'est que je ne suis pas développeur. C'est un outil - Bolt.new qui a créé le code et, même si je lui ai demandé à l'outil de ne rien stocker et en ligne et qu'il me l'a confirmé à l'écrit plusieurs fois, je n'estime pas avoir les compétences suffisantes pour l'auditer de façon sérieuse.
+  Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même sur :
+  <a href="https://github.com/mamatdunet/chatgptco2" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+    github.com/mamatdunet/chatgptco2
+  </a>.
+</p>
 
-          <p>
-            Vous pouvez aussi tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
-          </p>
+<p>
+  Vous pouvez aussi tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
+</p>
+
+<h3 className="text-xl font-semibold mt-6 mb-2">Dernière méthode faisable avec un peu d'huile de coude</h3>
+
+<p>
+  Je me suis aidé de l'IA pour créer un script Python assez simple. Le but : pouvoir l'exécuter depuis votre ordinateur pour récupérer les deux métriques qui nous intéressent :
+</p>
+<ul className="list-disc pl-6">
+  <li>Le nombre de messages de l'assistant</li>
+  <li>Le nombre total de mots générés</li>
+</ul>
+
+<p>Pour ce faire :</p>
+<ol className="list-decimal pl-6">
+  <li>Récupérez le script ici :
+    <a href="https://github.com/mamatdunet/chatgptco2/blob/main/analysehorsligne.py" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+      Script Python
+    </a> (les plus aguerris verront qu'il ne contient que de quoi calculer les métriques attendues). En haut à droite, cliquez sur la flèche "Télécharger" qui pointe vers le bas et enregistrez ce fichier à l'intérieur de votre dossier d'export ChatGPT dézippé (très important).
+  </li>
+  <li>Installez Python sur votre ordinateur :
+    <a href="https://www.python.org/downloads/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+      Télécharger Python
+    </a>
+  </li>
+  <li>Lancez le fichier "analysehorsligne.py" qui est dans votre dossier d'export ChatGPT. Une fenêtre de l'application Python s'ouvre.</li>
+  <li>Dans le menu en haut, cliquez sur Run puis sur Run Module. Les deux métriques s'affichent alors (Le nombre de messages de l'assistant et Le nombre total de mots générés).</li>
+  <li>Revenez sur ce site web et saisissez les dans l'encart orange.</li>
+  <li>Tadam ! Appréciez le résultat.</li>
+</ol>
+
 
           <h3 className="text-xl font-semibold mt-6 mb-2">Côté calcul</h3>
 
