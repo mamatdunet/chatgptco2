@@ -616,7 +616,7 @@ function App() {
           </p>
 
           <p>
-            À titre indicatif, <strong>une image générée</strong> représenterait environ <strong>2g de CO₂</strong> selon
+            À titre indicatif, <strong>une image générée</strong> représenterait environ <strong>2g de CO₂</strong> selon 
             <a href="https://arxiv.org/pdf/2311.16863" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
               cette étude de fin 2024
             </a>.
