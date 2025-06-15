@@ -20,6 +20,9 @@ function App() {
   const resultsRef = React.useRef<HTMLDivElement>(null);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [showExampleModal, setShowExampleModal] = useState(false);
+  const [manualMessages, setManualMessages] = useState<string>('');
+  const [manualWords, setManualWords] = useState<string>('');
+  const [manualResults, setManualResults] = useState<ParsedResults | null>(null);
 
   // Close tooltips when clicking outside
   React.useEffect(() => {
@@ -187,6 +190,47 @@ function App() {
     }
   }, [co2Factor, results?.totalTokens]);
 
+  // Handle manual input validation (only numbers, dots, and commas)
+  const handleManualInput = (value: string, setter: (value: string) => void) => {
+    const cleanValue = value.replace(/[^0-9.,]/g, '');
+    setter(cleanValue);
+  };
+
+  // Calculate manual results
+  const calculateManualResults = () => {
+    const messages = parseFloat(manualMessages.replace(',', '.')) || 0;
+    const words = parseFloat(manualWords.replace(',', '.')) || 0;
+
+    if (messages > 0 && words > 0) {
+      // Convert words to tokens (1 token ≈ 0.75 words)
+      const totalTokens = Math.round(words / 0.75);
+      
+      // Calculate CO2 emissions
+      const co2Emissions = (totalTokens / 1000) * co2Factor / 1000; // Convert grams to kg for display
+
+      // Calculate water consumption (0.32 ml per response)
+      const waterConsumption = messages * 0.32; // ml
+
+      setManualResults({
+        totalWords: words,
+        totalTokens,
+        co2Emissions,
+        waterConsumption,
+        conversationCount: 0, // Not applicable for manual calculation
+        messageCount: messages
+      });
+    } else {
+      setManualResults(null);
+    }
+  };
+
+  // Recalculate manual results when CO2 factor changes
+  React.useEffect(() => {
+    if (manualMessages && manualWords) {
+      calculateManualResults();
+    }
+  }, [co2Factor, manualMessages, manualWords]);
+
   const toggleTooltip = (tooltipId: string) => {
     setActiveTooltip(activeTooltip === tooltipId ? null : tooltipId);
   };
@@ -310,6 +354,349 @@ function App() {
             <li>Dans le dossier dézippé, récupérez le fichier conversation.json et glissez-déposez-le ou chargez-le dans la zone ci-dessus.</li>
           </ol>
         </div>
+
+        {/* Manual Calculator */}
+        <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-8">
+          <h3 className="text-lg font-semibold text-orange-800 mb-4">Calculateur manuel</h3>
+          <p className="text-orange-700 mb-4 text-sm">
+            Si vous n'avez pas accès à votre fichier d'export, vous pouvez estimer votre empreinte en saisissant manuellement le nombre de messages et de mots générés par ChatGPT.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium text-orange-800 mb-2">
+                Nombre de messages de l'assistant
+              </label>
+              <input
+                type="text"
+                value={manualMessages}
+                onChange={(e) => handleManualInput(e.target.value, setManualMessages)}
+                placeholder="Ex: 1500"
+                className="w-full px-3 py-2 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-orange-800 mb-2">
+                Nombre total de mots générés
+              </label>
+              <input
+                type="text"
+                value={manualWords}
+                onChange={(e) => handleManualInput(e.target.value, setManualWords)}
+                placeholder="Ex: 50000"
+                className="w-full px-3 py-2 border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={calculateManualResults}
+            disabled={!manualMessages || !manualWords}
+            className={`w-full py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
+              manualMessages && manualWords
+                ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
+          >
+            Calculer l'empreinte carbone
+          </button>
+        </div>
+
+        {/* Manual Results */}
+        {manualResults && (
+          <div className="space-y-6 mb-8">
+            {/* Résultats principaux */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Mots */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center mb-3">
+                  <FileText className="w-6 h-6 text-blue-500 mr-3" />
+                  <h3 className="text-lg font-semibold text-gray-800">Total des mots</h3>
+                </div>
+                <p className="text-3xl font-bold text-blue-600 mb-2">
+                  {manualResults.totalWords.toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Générés par l'assistant ChatGPT
+                </p>
+              </div>
+
+              {/* Tokens */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center mb-3">
+                  <Zap className="w-6 h-6 text-amber-500 mr-3" />
+                  <h3 className="text-lg font-semibold text-gray-800">Tokens estimés</h3>
+                </div>
+                <p className="text-3xl font-bold text-amber-600 mb-2">
+                  {manualResults.totalTokens.toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-500">
+                  ~{(manualResults.totalWords / manualResults.totalTokens).toFixed(2)} mots par token
+                </p>
+              </div>
+
+              {/* Émissions CO2 */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 relative">
+                <div className="flex items-center mb-3">
+                  <div className="bg-green-100 p-3 rounded-full mr-3">
+                    <span className="text-2xl">💨</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800">Émissions CO₂</h3>
+                </div>
+                <p className="text-3xl font-bold text-green-600 mb-2">
+                  {manualResults.co2Emissions.toFixed(3)} kg
+                </p>
+                <p className="text-sm text-gray-500">
+                  Impact environnemental approximatif
+                </p>
+                <button
+                  onClick={() => toggleTooltip('manual-co2')}
+                  className="tooltip-trigger absolute bottom-3 right-3 p-1 text-gray-400 hover:text-green-600 transition-colors"
+                >
+                  <Info className="w-4 h-4" />
+                </button>
+                {activeTooltip === 'manual-co2' && (
+                  <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    Calcul : {manualResults.totalTokens.toLocaleString()} tokens ÷ 1000 × {co2Factor}g ÷ 1000 = {manualResults.co2Emissions.toFixed(3)} kg CO₂
+                    <br /><br />
+                    Les émissions CO₂ calculées ici dépendent du Facteur d'émission en bas de la page que vous pouvez faire évoluer.
+                  </div>
+                )}
+              </div>
+
+              {/* Consommation d'eau */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 relative">
+                <div className="flex items-center mb-3">
+                  <div className="bg-blue-100 p-3 rounded-full mr-3">
+                    <span className="text-2xl">💧</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800">Eau consommée</h3>
+                </div>
+                <p className="text-3xl font-bold text-blue-600 mb-2">
+                  {manualResults.waterConsumption >= 1000 
+                    ? `${(manualResults.waterConsumption / 1000).toFixed(2)} L`
+                    : `${manualResults.waterConsumption.toFixed(1)} ml`
+                  }
+                </p>
+                <p className="text-sm text-gray-500">
+                  Pour le refroidissement des serveurs, soit {(manualResults.waterConsumption / 1000 / 10).toFixed(1)} min sous la douche (à 10L/min)
+                </p>
+                <button
+                  onClick={() => toggleTooltip('manual-water')}
+                  className="tooltip-trigger absolute bottom-3 right-3 p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                >
+                  <Info className="w-4 h-4" />
+                </button>
+                {activeTooltip === 'manual-water' && (
+                  <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    Calcul : {manualResults.messageCount} messages × 0,32 ml = {manualResults.waterConsumption.toFixed(1)} ml
+                    <br />Base : 0,32 ml d'eau par requête ChatGPT
+                    <br />Source : <a href="https://www.lesnumeriques.com/intelligence-artificielle/un-quinzieme-de-cuillere-a-cafe-l-etrange-aveu-de-sam-altman-sur-l-impact-ecologique-de-chatgpt-n238063.html" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Les Numériques - Impact écologique ChatGPT</a>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Contexte environnemental pour les résultats manuels */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-8">
+              <div className="flex items-center mb-3">
+                <Calculator className="w-5 h-5 text-green-600 mr-2" />
+                <h3 className="text-2xl font-bold text-green-800">Équivalents environnementaux</h3>
+              </div>
+              <p className="text-green-700 mb-6 text-lg">
+                Votre empreinte carbone ChatGPT équivaut à :
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Voiture */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-blue-100 p-3 rounded-full mr-3">
+                      <span className="text-2xl">🚗</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Voiture essence</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-car')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-blue-600 mb-1">
+                    {(manualResults.co2Emissions * 10).toFixed(1)} km
+                  </p>
+                  <p className="text-sm text-gray-500">parcourus</p>
+                  {activeTooltip === 'manual-car' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.co2Emissions.toFixed(3)} kg CO₂ × 10 km/kg = {(manualResults.co2Emissions * 10).toFixed(1)} km
+                      <br />Base : 100g CO₂/km pour une voiture essence moyenne
+                      <br />Source : <a href="https://carlabelling.ademe.fr/chiffrescles/r/moyenneEmissionCo2Gamme" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">ADEME</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Viande */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-red-100 p-3 rounded-full mr-3">
+                      <span className="text-2xl">🐄</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Entrecôtes</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-meat')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-red-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-red-600 mb-1">
+                    {(manualResults.co2Emissions / 28 * 1000 / 300).toFixed(1)}
+                  </p>
+                  <p className="text-sm text-gray-500">de 300g chacune</p>
+                  {activeTooltip === 'manual-meat' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.co2Emissions.toFixed(3)} kg CO₂ ÷ 28 kg CO₂/kg bœuf × 1000g ÷ 300g = {(manualResults.co2Emissions / 28 * 1000 / 300).toFixed(1)} entrecôtes
+                      <br />Base : 28 kg CO₂ par kg de bœuf
+                      <br />Source : <a href="https://impactco2.fr/outils/alimentation/boeuf" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Impact CO₂</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Streaming */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-purple-100 p-3 rounded-full mr-3">
+                      <div className="w-6 h-6 bg-red-600 rounded flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">N</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Streaming sur une télé</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-streaming')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-purple-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-purple-600 mb-1">
+                    {(manualResults.co2Emissions / 0.07).toFixed(1)}h
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    soit {((manualResults.co2Emissions / 0.07) / 2).toFixed(1)} films de 2h
+                  </p>
+                  {activeTooltip === 'manual-streaming' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,07 kg CO₂/h = {(manualResults.co2Emissions / 0.07).toFixed(1)}h
+                      <br />Base : 70g CO₂ par heure de streaming 4K
+                      <br />Source : <a href="https://impactco2.fr/outils/usagenumerique/streamingvideo" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Impact CO₂</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Avion */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-sky-100 p-3 rounded-full mr-3">
+                      <span className="text-2xl">✈️</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Distance en avion</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-plane')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-sky-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-sky-600 mb-1">
+                    {(manualResults.co2Emissions / 0.259).toFixed(1)} km
+                  </p>
+                  <p className="text-sm text-gray-500">parcourus</p>
+                  {activeTooltip === 'manual-plane' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,259 kg CO₂/km = {(manualResults.co2Emissions / 0.259).toFixed(1)} km
+                      <br />Base : 259g CO₂ par km de vol (court courrier)
+                      <br />Source : <a href="https://impactco2.fr/outils/transport/avion-courtcourrier" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Impact CO₂</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Séries TV */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-indigo-100 p-3 rounded-full mr-3">
+                      <span className="text-2xl">📺</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Saisons de série</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-series')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-indigo-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-indigo-600 mb-1">
+                    {((manualResults.co2Emissions / 0.07) / 8).toFixed(1)}
+                  </p>
+                  <p className="text-sm text-gray-500">de 8 épisodes d'1h</p>
+                  {activeTooltip === 'manual-series' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,07 kg CO₂/h ÷ 8h = {((manualResults.co2Emissions / 0.07) / 8).toFixed(1)} saisons
+                      <br />Base : 70g CO₂/h de streaming × 8h par saison
+                      <br />Source : <a href="https://impactco2.fr/outils/usagenumerique/streamingvideo" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Impact CO₂</a>
+                    </div>
+                  )}
+                </div>
+
+                {/* Électricité */}
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 relative">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-yellow-100 p-3 rounded-full mr-3">
+                      <span className="text-2xl">⚡</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Consommation électrique</h4>
+                    </div>
+                    <button
+                      onClick={() => toggleTooltip('manual-electricity')}
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-yellow-600 transition-colors"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-3xl font-bold text-yellow-600 mb-1">
+                    {(manualResults.messageCount * 0.34 / 1000).toFixed(2)} kWh
+                  </p>
+                  <p className="text-sm text-gray-500">d'électricité française</p>
+                  {activeTooltip === 'manual-electricity' && (
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                      <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                      Calcul : {manualResults.messageCount} messages × 0,34 Wh ÷ 1000 = {(manualResults.messageCount * 0.34 / 1000).toFixed(2)} kWh
+                      <br />Base : 0,34 Wh par message ChatGPT
+                      <br />Source : <a href="https://blog.samaltman.com/the-gentle-singularity" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Blog Sam Altman</a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Affichage des erreurs */}
         {error && (
