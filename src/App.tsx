@@ -380,15 +380,7 @@ function App() {
                   <div className="bg-blue-100 p-3 rounded-full mr-3">
                     <span className="text-2xl">💧</span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-800">Eau consommée</h3>
-                  </div>
-                  <button
-                    onClick={() => toggleTooltip('water')}
-                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                  >
-                    <Info className="w-4 h-4" />
-                  </button>
+                  <h3 className="text-lg font-semibold text-gray-800">Eau consommée</h3>
                 </div>
                 <p className="text-3xl font-bold text-blue-600 mb-2">
                   {results.waterConsumption >= 1000 
@@ -399,6 +391,12 @@ function App() {
                 <p className="text-sm text-gray-500">
                   Pour le refroidissement des serveurs, soit {(results.waterConsumption / 1000 / 10).toFixed(1)} min sous la douche (à 10L/min)
                 </p>
+                <button
+                  onClick={() => toggleTooltip('water')}
+                  className="absolute bottom-3 right-3 p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                >
+                  <Info className="w-4 h-4" />
+                </button>
                 {activeTooltip === 'water' && (
                   <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                     <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
