@@ -176,6 +176,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
+      {/* Privacy Banner */}
+      <div className="bg-blue-600 text-white py-3 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <p className="text-sm font-medium">
+            ☝️ Ce site ne stocke aucune donnée personnelle (voir pied de page pour plus d'informations)
+          </p>
+        </div>
+      </div>
+      
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
