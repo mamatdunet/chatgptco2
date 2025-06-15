@@ -1111,10 +1111,10 @@ function App() {
       https://github.com/mamatdunet/chatgptco2/blob/main/analysehorsligne.py
     </a> (les plus aguerris verront qu'il ne contient que de quoi calculer les métriques attendues). En haut à droite, cliquez sur la flèche "Télécharger" qui pointe vers le bas et enregistrez ce fichier à l'intérieur de votre dossier d'export ChatGPT dézippé (très important).
   </li>
-  <li>Installez Python sur votre ordinateur :
+  <li>Installez 
     <a href="https://www.python.org/downloads/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-      Télécharger Python
-    </a>
+      l'outil Python
+    </a> sur votre ordinateur :
   </li>
   <li>Lancez le fichier "analysehorsligne.py" qui est dans votre dossier d'export ChatGPT. Une fenêtre de l'application Python s'ouvre.</li>
   <li>Dans le menu en haut, cliquez sur Run puis sur Run Module. Les deux métriques s'affichent alors (Le nombre de messages de l'assistant et Le nombre total de mots générés).</li>
