@@ -582,8 +582,7 @@ function App() {
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.messageCount} messages × 0,34 Wh ÷ 1000 = {(results.messageCount * 0.34 / 1000).toFixed(2)} kWh
                       <br />Base : 0,34 Wh par message ChatGPT
-                      <br />Source : <a href="https://www.carbone4.com/analyse-faq-energie-ges-population#footnote-3" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Carbone 4</a>
-                      <br />Source : <a href="https://www.theverge.com/news/685045/sam-altman-average-chatgpt-energy-water" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">The Verge</a>
+                      <br />Source : <a href="https://blog.samaltman.com/the-gentle-singularity" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Blog Sam Altman</a>
                     </div>
                   )}
                 </div>
@@ -594,9 +593,33 @@ function App() {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-8">
             {/* Paramètres du facteur CO2 - affiché après chargement */}
-            <div className="flex items-center mb-3">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center">
               <Settings className="w-5 h-5 text-gray-500 mr-2" />
               <h3 className="text-lg font-semibold text-gray-800">Facteur d'émission</h3>
+              </div>
+              <div className="relative">
+                <button
+                  onClick={() => toggleTooltip('co2-factor')}
+                  className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                >
+                  <Info className="w-4 h-4" />
+                </button>
+                {activeTooltip === 'co2-factor' && (
+                  <div className="absolute top-full right-0 mt-2 w-80 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="absolute -top-1 right-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    <p className="mb-2">
+                      <strong>Source pour 20g CO₂/1000 tokens :</strong>
+                    </p>
+                    <p className="mb-2">
+                      Cette valeur semble équilibrée selon diverses estimations, même si ChatGPT/OpenAI ne communique pas clairement sur ces données.
+                    </p>
+                    <p>
+                      Référence : <a href="https://chatgpt.com/share/684e9feb-7da8-8002-9547-6c00978f5de5" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Discussion ChatGPT sur les estimations CO₂</a>
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
             <p className="text-sm text-gray-600 mb-4">
               Le facteur d'émission indiqué par défaut est de {co2Factor} grammes de CO₂ pour 1000 tokens (environ 750 mots) avec ChatGPT, ce qui semble plutôt être une fourchette haute. Faites-le évoluer à la hausse ou à la baisse pour voir l'impact sur les résultats.
