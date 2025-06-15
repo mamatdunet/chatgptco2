@@ -188,6 +188,15 @@ function App() {
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Calculez l'empreinte carbone approximative de vos conversations ChatGPT en analysant votre historique de chat exporté
           </p>
+          
+          {/* Bandeau de confidentialité */}
+          <div className="mt-6 max-w-2xl mx-auto">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+              <p className="text-blue-800 text-sm font-medium text-center">
+                ☝️ Ce site Internet ne collecte pas vos données personnelles (voir pied de page)
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Zone de téléchargement */}
