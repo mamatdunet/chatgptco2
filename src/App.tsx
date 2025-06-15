@@ -1095,15 +1095,15 @@ function App() {
 </p><br />
 <br />
 <p>Dernière méthode faisable avec un peu d'huile de coude</p>
-
+<br />
 <p>
   Je me suis aidé de l'IA pour créer un script Python assez simple. Le but : pouvoir l'exécuter depuis votre ordinateur pour récupérer les deux métriques qui nous intéressent :
-</p>
+</p><br />
 <ul className="list-disc pl-6">
   <li>Le nombre de messages de l'assistant</li>
   <li>Le nombre total de mots générés</li>
 </ul>
-
+<br />
 <p>Pour ce faire :</p>
 <ol className="list-decimal pl-6">
   <li>Récupérez le script ici :
