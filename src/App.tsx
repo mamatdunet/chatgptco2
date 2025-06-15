@@ -1108,7 +1108,7 @@ function App() {
 <ol className="list-decimal pl-6">
   <li>Récupérez le script ici :
     <a href="https://github.com/mamatdunet/chatgptco2/blob/main/analysehorsligne.py" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-      Script Python
+      https://github.com/mamatdunet/chatgptco2/blob/main/analysehorsligne.py
     </a> (les plus aguerris verront qu'il ne contient que de quoi calculer les métriques attendues). En haut à droite, cliquez sur la flèche "Télécharger" qui pointe vers le bas et enregistrez ce fichier à l'intérieur de votre dossier d'export ChatGPT dézippé (très important).
   </li>
   <li>Installez Python sur votre ordinateur :
