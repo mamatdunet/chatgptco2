@@ -1091,10 +1091,10 @@ function App() {
 </p>
 
 <p>
-  Pour info, vous pouvez faire cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
+  À noter que si vous chargez le site, coupez Internet, puis lancez l'analyse, elle fonctionnera toujours.
 </p>
 <br />
-<p><bold>Dernière méthode faisable avec un peu d'huile de coude</bold></p>
+<p><h4>Dernière méthode faisable avec un peu d'huile de coude</h4></p>
 <br />
 <p>
   Je me suis aidé de l'IA pour créer un script Python assez simple. Le but : pouvoir l'exécuter depuis votre ordinateur pour récupérer les deux métriques qui nous intéressent :
