@@ -1113,7 +1113,7 @@ function App() {
   </li>
   <li>Installez 
     <a href="https://www.python.org/downloads/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
-      l'outil Python
+       l'outil Python
     </a> sur votre ordinateur :
   </li>
   <li>Lancez le fichier "analysehorsligne.py" qui est dans votre dossier d'export ChatGPT. Une fenêtre de l'application Python s'ouvre.</li>
