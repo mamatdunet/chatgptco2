@@ -361,7 +361,9 @@ function App() {
               {/* Émissions CO2 */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <div className="flex items-center mb-3">
-                  <Leaf className="w-6 h-6 text-green-500 mr-3" />
+                  <div className="bg-green-100 p-3 rounded-full mr-3">
+                    <span className="text-2xl">💨</span>
+                  </div>
                   <h3 className="text-lg font-semibold text-gray-800">Émissions CO₂</h3>
                 </div>
                 <p className="text-3xl font-bold text-green-600 mb-2">
