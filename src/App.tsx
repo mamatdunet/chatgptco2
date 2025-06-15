@@ -15,7 +15,7 @@ function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [results, setResults] = useState<ParsedResults | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [co2Factor, setCo2Factor] = useState(10); // g CO2 per 1000 tokens
+  const [co2Factor, setCo2Factor] = useState(20); // g CO2 per 1000 tokens
   const [fileName, setFileName] = useState<string>('');
   const resultsRef = React.useRef<HTMLDivElement>(null);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
