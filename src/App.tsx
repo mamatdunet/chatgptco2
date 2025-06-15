@@ -273,7 +273,7 @@ function App() {
                 </h3>
                 <div className="flex justify-center">
                   <img 
-                    src="/public/Exemple.png" 
+                    src="https://i.ibb.co/KppJqtBF/Exemple.png" 
                     alt="Exemple de résultat du calculateur CO2 ChatGPT montrant 938 501 mots, 1 251 335 tokens, 12.513 kg de CO2 et 2.10 L d'eau consommée"
                     className="max-w-full h-auto rounded-lg shadow-sm border border-gray-100"
                   />
