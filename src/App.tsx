@@ -21,6 +21,22 @@ function App() {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [showExampleModal, setShowExampleModal] = useState(false);
 
+  // Close tooltips when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      // Check if the click is outside tooltip content and not on a tooltip trigger button
+      if (!target.closest('.tooltip-content') && !target.closest('.tooltip-trigger')) {
+        setActiveTooltip(null);
+      }
+    };
+
+    if (activeTooltip) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [activeTooltip]);
+
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(true);
@@ -374,12 +390,12 @@ function App() {
                 </p>
                 <button
                   onClick={() => toggleTooltip('co2')}
-                  className="absolute bottom-3 right-3 p-1 text-gray-400 hover:text-green-600 transition-colors"
+                  className="tooltip-trigger absolute bottom-3 right-3 p-1 text-gray-400 hover:text-green-600 transition-colors"
                 >
                   <Info className="w-4 h-4" />
                 </button>
                 {activeTooltip === 'co2' && (
-                  <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                  <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                     <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                     Calcul : {results.totalTokens.toLocaleString()} tokens ÷ 1000 × {co2Factor}g ÷ 1000 = {results.co2Emissions.toFixed(3)} kg CO₂
                     <br /><br />
@@ -407,12 +423,12 @@ function App() {
                 </p>
                 <button
                   onClick={() => toggleTooltip('water')}
-                  className="absolute bottom-3 right-3 p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                  className="tooltip-trigger absolute bottom-3 right-3 p-1 text-gray-400 hover:text-blue-600 transition-colors"
                 >
                   <Info className="w-4 h-4" />
                 </button>
                 {activeTooltip === 'water' && (
-                  <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                  <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                     <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                     Calcul : {results.messageCount} messages × 0,32 ml = {results.waterConsumption.toFixed(1)} ml
                     <br />Base : 0,32 ml d'eau par requête ChatGPT
@@ -444,7 +460,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('car')}
-                      className="ml-auto p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-blue-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -454,7 +470,7 @@ function App() {
                   </p>
                   <p className="text-sm text-gray-500">parcourus</p>
                   {activeTooltip === 'car' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.co2Emissions.toFixed(3)} kg CO₂ × 10 km/kg = {(results.co2Emissions * 10).toFixed(1)} km
                       <br />Base : 100g CO₂/km pour une voiture essence moyenne
@@ -474,7 +490,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('meat')}
-                      className="ml-auto p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-red-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -484,7 +500,7 @@ function App() {
                   </p>
                   <p className="text-sm text-gray-500">de 300g chacune</p>
                   {activeTooltip === 'meat' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.co2Emissions.toFixed(3)} kg CO₂ ÷ 28 kg CO₂/kg bœuf × 1000g ÷ 300g = {(results.co2Emissions / 28 * 1000 / 300).toFixed(1)} entrecôtes
                       <br />Base : 28 kg CO₂ par kg de bœuf
@@ -506,7 +522,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('streaming')}
-                      className="ml-auto p-1 text-gray-400 hover:text-purple-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-purple-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -518,7 +534,7 @@ function App() {
                     soit {((results.co2Emissions / 0.07) / 2).toFixed(1)} films de 2h
                   </p>
                   {activeTooltip === 'streaming' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,07 kg CO₂/h = {(results.co2Emissions / 0.07).toFixed(1)}h
                       <br />Base : 70g CO₂ par heure de streaming 4K
@@ -538,7 +554,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('plane')}
-                      className="ml-auto p-1 text-gray-400 hover:text-sky-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-sky-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -548,7 +564,7 @@ function App() {
                   </p>
                   <p className="text-sm text-gray-500">parcourus</p>
                   {activeTooltip === 'plane' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,259 kg CO₂/km = {(results.co2Emissions / 0.259).toFixed(1)} km
                       <br />Base : 259g CO₂ par km de vol (court courrier)
@@ -568,7 +584,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('series')}
-                      className="ml-auto p-1 text-gray-400 hover:text-indigo-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-indigo-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -578,7 +594,7 @@ function App() {
                   </p>
                   <p className="text-sm text-gray-500">de 8 épisodes d'1h</p>
                   {activeTooltip === 'series' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.co2Emissions.toFixed(3)} kg CO₂ ÷ 0,07 kg CO₂/h ÷ 8h = {((results.co2Emissions / 0.07) / 8).toFixed(1)} saisons
                       <br />Base : 70g CO₂/h de streaming × 8h par saison
@@ -598,7 +614,7 @@ function App() {
                     </div>
                     <button
                       onClick={() => toggleTooltip('electricity')}
-                      className="ml-auto p-1 text-gray-400 hover:text-yellow-600 transition-colors"
+                      className="tooltip-trigger ml-auto p-1 text-gray-400 hover:text-yellow-600 transition-colors"
                     >
                       <Info className="w-4 h-4" />
                     </button>
@@ -608,7 +624,7 @@ function App() {
                   </p>
                   <p className="text-sm text-gray-500">d'électricité française</p>
                   {activeTooltip === 'electricity' && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="tooltip-content absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                       <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                       Calcul : {results.messageCount} messages × 0,34 Wh ÷ 1000 = {(results.messageCount * 0.34 / 1000).toFixed(2)} kWh
                       <br />Base : 0,34 Wh par message ChatGPT
@@ -631,12 +647,12 @@ function App() {
               <div className="relative">
                 <button
                   onClick={() => toggleTooltip('co2-factor')}
-                  className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                  className="tooltip-trigger p-1 text-gray-400 hover:text-blue-600 transition-colors"
                 >
                   <Info className="w-4 h-4" />
                 </button>
                 {activeTooltip === 'co2-factor' && (
-                  <div className="absolute top-full right-0 mt-2 w-80 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                  <div className="tooltip-content absolute top-full right-0 mt-2 w-80 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
                     <div className="absolute -top-1 right-4 w-2 h-2 bg-gray-800 rotate-45"></div>
                     <p className="mb-2">
                       <strong>Source pour 20g CO₂/1000 tokens :</strong>
