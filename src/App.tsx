@@ -19,6 +19,7 @@ function App() {
   const [fileName, setFileName] = useState<string>('');
   const resultsRef = React.useRef<HTMLDivElement>(null);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [showExampleModal, setShowExampleModal] = useState(false);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -245,16 +246,42 @@ function App() {
         </div>
 
         {/* Exemple de résultat */}
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-8">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-8 text-center">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Un exemple de résultat pour un compte ChatGPT utilisé fréquemment durant un peu plus de 2 ans et demi entre Novembre 2022 et Juin 2025</h3>
-          <div className="flex justify-center">
-            <img 
-              src="/public/Exemple.png" 
-              alt="Exemple de résultat du calculateur CO2 ChatGPT montrant 938 501 mots, 1 251 335 tokens, 12.513 kg de CO2 et 2.10 L d'eau consommée"
-              className="max-w-full h-auto rounded-lg shadow-sm border border-gray-100"
-            />
-          </div>
+          <button
+            onClick={() => setShowExampleModal(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 flex items-center mx-auto"
+          >
+            <span className="mr-2">👁️</span>
+            Voir l'exemple
+          </button>
         </div>
+
+        {/* Modal pour l'exemple */}
+        {showExampleModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl max-w-4xl max-h-[90vh] overflow-auto relative">
+              <button
+                onClick={() => setShowExampleModal(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg"
+              >
+                ×
+              </button>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4 pr-8">
+                  Exemple de résultat pour un compte ChatGPT utilisé fréquemment durant un peu plus de 2 ans et demi entre Novembre 2022 et Juin 2025
+                </h3>
+                <div className="flex justify-center">
+                  <img 
+                    src="/public/Exemple.png" 
+                    alt="Exemple de résultat du calculateur CO2 ChatGPT montrant 938 501 mots, 1 251 335 tokens, 12.513 kg de CO2 et 2.10 L d'eau consommée"
+                    className="max-w-full h-auto rounded-lg shadow-sm border border-gray-100"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Tutoriel d'export */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
