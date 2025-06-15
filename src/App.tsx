@@ -645,7 +645,7 @@ function App() {
           <h3 className="text-xl font-semibold mt-6 mb-2">Côté calcul</h3>
 
           <p>
-            Les résultats sont estimatifs, issus de <strong>sources diverses</strong> – les données exactes d'OpenAI étant rarement rendues publiques.
+            Les résultats sont estimatifs, issus de <strong>sources diverses</strong> – les données exactes d'OpenAI étant rarement rendues publiques. Une fois votre fichier importé, cliquez sur le petit "i" à côté de chaque équivalence pour en savoir plus.
             Les émissions réelles peuvent varier selon le mix énergétique utilisé (ici : hypothèse basée sur l'électricité française).
           </p>
 
