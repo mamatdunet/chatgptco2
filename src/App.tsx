@@ -231,6 +231,11 @@ function App() {
     }
   }, [co2Factor, manualMessages, manualWords]);
 
+  // Auto-calculate when both fields have values
+  React.useEffect(() => {
+    calculateManualResults();
+  }, [manualMessages, manualWords, co2Factor]);
+
   const toggleTooltip = (tooltipId: string) => {
     setActiveTooltip(activeTooltip === tooltipId ? null : tooltipId);
   };
@@ -388,18 +393,6 @@ function App() {
               />
             </div>
           </div>
-
-          <button
-            onClick={calculateManualResults}
-            disabled={!manualMessages || !manualWords}
-            className={`w-full py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
-              manualMessages && manualWords
-                ? 'bg-orange-600 hover:bg-orange-700 text-white'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            Calculer l'empreinte carbone
-          </button>
         </div>
 
         {/* Manual Results */}
