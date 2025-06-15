@@ -244,18 +244,6 @@ function App() {
           </div>
         </div>
 
-        {/* Tutoriel d'export */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-semibold text-blue-800 mb-4">Comment exporter vos données ChatGPT ?</h3>
-          <ol className="text-sm text-blue-700 space-y-2 list-decimal list-inside">
-            <li>En cliquant sur la pastille ronde en haut à droite de votre compte &gt; puis en vous rendant dans "Paramètres"</li>
-            <li>Dans la fenêtre qui s'affiche, cliquez sur "Gestion des données"</li>
-            <li>Votre export est annoncé pour arriver sous 24h dans votre boîte email. En pratique, il devrait arriver en quelques minutes. Vous recevrez une notification par mail. Dépêchez-vous, vous n'avez que 24h pour télécharger vos données via ce lien.</li>
-            <li>Une fois disponible, téléchargez-le et dézippez le dossier contenant votre historique.</li>
-            <li>Dans le dossier dézippé, récupérez le fichier conversation.json et glissez-déposez-le ou chargez-le dans la zone ci-dessus.</li>
-          </ol>
-        </div>
-
         {/* Exemple de résultat */}
         <div className="bg-white border border-gray-200 rounded-xl p-6 mb-8">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Un exemple de résultat pour un compte ChatGPT utilisé fréquemment durant un peu plus de 2 ans et demi entre Novembre 2022 et Juin 2025</h3>
@@ -266,6 +254,18 @@ function App() {
               className="max-w-full h-auto rounded-lg shadow-sm border border-gray-100"
             />
           </div>
+        </div>
+
+        {/* Tutoriel d'export */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+          <h3 className="text-lg font-semibold text-blue-800 mb-4">Comment exporter vos données ChatGPT ?</h3>
+          <ol className="text-sm text-blue-700 space-y-2 list-decimal list-inside">
+            <li>En cliquant sur la pastille ronde en haut à droite de votre compte &gt; puis en vous rendant dans "Paramètres"</li>
+            <li>Dans la fenêtre qui s'affiche, cliquez sur "Gestion des données"</li>
+            <li>Votre export est annoncé pour arriver sous 24h dans votre boîte email. En pratique, il devrait arriver en quelques minutes. Vous recevrez une notification par mail. Dépêchez-vous, vous n'avez que 24h pour télécharger vos données via ce lien.</li>
+            <li>Une fois disponible, téléchargez-le et dézippez le dossier contenant votre historique.</li>
+            <li>Dans le dossier dézippé, récupérez le fichier conversation.json et glissez-déposez-le ou chargez-le dans la zone ci-dessus.</li>
+          </ol>
         </div>
 
         {/* Affichage des erreurs */}
