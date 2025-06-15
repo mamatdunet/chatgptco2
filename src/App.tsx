@@ -617,6 +617,9 @@ function App() {
                     <p>
                       Référence : <a href="https://chatgpt.com/share/684e9feb-7da8-8002-9547-6c00978f5de5" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Discussion ChatGPT sur les estimations CO₂</a>
                     </p>
+                    <p>
+                      Consommation énergétique : <a href="https://blog.samaltman.com/the-gentle-singularity" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">Blog Sam Altman</a> (0,34 Wh et 0,32ml d'eau par requête)
+                    </p>
                   </div>
                 )}
               </div>
