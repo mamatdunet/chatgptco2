@@ -359,7 +359,7 @@ function App() {
               </div>
 
               {/* Émissions CO2 */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 relative">
                 <div className="flex items-center mb-3">
                   <div className="bg-green-100 p-3 rounded-full mr-3">
                     <span className="text-2xl">💨</span>
@@ -372,6 +372,20 @@ function App() {
                 <p className="text-sm text-gray-500">
                   Impact environnemental approximatif
                 </p>
+                <button
+                  onClick={() => toggleTooltip('co2')}
+                  className="absolute bottom-3 right-3 p-1 text-gray-400 hover:text-green-600 transition-colors"
+                >
+                  <Info className="w-4 h-4" />
+                </button>
+                {activeTooltip === 'co2' && (
+                  <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg z-10">
+                    <div className="absolute -top-1 left-4 w-2 h-2 bg-gray-800 rotate-45"></div>
+                    Calcul : {results.totalTokens.toLocaleString()} tokens ÷ 1000 × {co2Factor}g ÷ 1000 = {results.co2Emissions.toFixed(3)} kg CO₂
+                    <br /><br />
+                    Les émissions CO₂ calculées ici dépendent du Facteur d'émission en bas de la page que vous pouvez faire évoluer.
+                  </div>
+                )}
               </div>
 
               {/* Consommation d'eau */}
