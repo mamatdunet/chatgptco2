@@ -364,7 +364,7 @@ function App() {
         <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-8">
           <h3 className="text-lg font-semibold text-orange-800 mb-4">Calculateur manuel</h3>
           <p className="text-orange-700 mb-4 text-sm">
-            Si vous n'avez pas accès à votre fichier d'export ou si vous ne souhaitez pas le charger sur ce site web, vous pouvez estimer votre empreinte en saisissant manuellement le nombre de messages et de mots générés par ChatGPT.
+            Si vous n'avez pas accès à votre fichier d'export ou si vous ne souhaitez pas le charger sur ce site web, vous pouvez estimer votre empreinte en saisissant manuellement le nombre de messages et de mots générés par ChatGPT (voir infos en bas de la page).
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
