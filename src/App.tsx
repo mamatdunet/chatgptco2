@@ -583,15 +583,56 @@ function App() {
           </div>
         )}
 
-        {/* Pied de page */}
-        <footer className="mt-12 text-center text-gray-500 text-sm">
+        {/* À propos du calculateur */}
+        <section className="prose prose-lg max-w-3xl mx-auto px-4 py-8">
+          <h2 className="text-2xl font-bold mb-4">À propos du calculateur</h2>
+
           <p>
-            Ce calculateur fonctionne entièrement dans votre navigateur. Lors de cette analyse, aucune de vos données personnelles n'est téléchargée ou stockée en ligne. Si vous en doutez, vous pouvez toujours auditer ou récupérer le code pour l'exécuter chez vous sur https://github.com/mamatdunet/chatgptco2 . Vous verrez aussi que l'analyse fonctionne si vous chargez le site et que vous coupez votre connexion Internet au moment de l'analyse.
-            Il s'agit d'une estimation basée sur la consommation énergétique informatique. 
-            Les émissions réelles peuvent varier selon les sources d'énergie et l'efficacité du modèle.
-            Ce calculateur ne prend en compte que les conversations textuelles de votre historique de conversation. Il ne calcule pas l'impact CO₂ de la génération d'images ou de vidéos que vous avez pu faire avec ChatGPT (environ 2g par image semble-t-il selon ces travaux de fin 2024 : <a href="https://arxiv.org/pdf/2311.16863" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">https://arxiv.org/pdf/2311.16863</a>).
+            Ce calculateur fonctionne entièrement dans votre navigateur.
           </p>
-        </footer>
+
+          <p>
+            Lors de cette analyse, <strong>aucune de vos données personnelles n'est téléchargée ni stockée en ligne</strong>.
+            Si vous en doutez, vous pouvez auditer ou exécuter le code vous-même :
+            <a href="https://github.com/mamatdunet/chatgptco2" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              github.com/mamatdunet/chatgptco2
+            </a>.
+          </p>
+
+          <p>
+            Vous pouvez même tester cela : chargez le site, coupez Internet, puis lancez l'analyse. Elle fonctionnera toujours.
+          </p>
+
+          <h3 className="text-xl font-semibold mt-6 mb-2">Côté calcul</h3>
+
+          <p>
+            Les résultats sont estimatifs, issus de <strong>sources diverses</strong> – les données exactes d'OpenAI étant rarement rendues publiques.
+            Les émissions réelles peuvent varier selon le mix énergétique utilisé (ici : hypothèse basée sur l'électricité française).
+          </p>
+
+          <p>
+            <strong>À noter :</strong> ce calculateur ne prend en compte que les <em>conversations textuelles</em> de votre historique.
+            Il ne mesure pas l'impact CO₂ des images ou vidéos générées avec ChatGPT.
+          </p>
+
+          <p>
+            À titre indicatif, <strong>une image générée</strong> représenterait environ <strong>2g de CO₂</strong> selon
+            <a href="https://arxiv.org/pdf/2311.16863" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+              cette étude de fin 2024
+            </a>.
+          </p>
+
+          <footer className="mt-8 border-t pt-4 text-sm text-gray-600">
+            <p>
+              Réalisé avec ❤️ et entrain, par
+              <a href="https://www.linkedin.com/in/matthieuchatry/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                Matthieu Chatry
+              </a> – 
+              <a href="mailto:matthieu@amuseurs.fr" className="hover:underline">matthieu@amuseurs.fr</a> –
+              <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="hover:underline">sur Bolt.new</a>
+            </p>
+          </footer>
+        </section>
       </div>
     </div>
   );
